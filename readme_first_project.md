@@ -29,15 +29,17 @@ select SUM(CASE WHEN amount_of_orders = 1 THEN 1 ELSE 0 END) as customers_with_1
 from (select user_id, count(distinct order_id) as amount_of_orders from orders group by 1) as t1;
 ```
 Result:
- customers_with_1_purchase | customers_with_2_purchases | customers_with_more_than_3_purchases 
----------------------------+----------------------------+--------------------------------------
-                        25 |                         22 |                                   81
+
+| First customers_with_1_purchase  | customers_with_2_purchases  | customers_with_more_than_3_purchases  |
+| -------------------------------- | --------------------------- | ------------------------------------- | 
+| 25                               | 22                          | 81                                    |
 ## On average, how many unique sessions do we have per hour?
 ``` sql
 select ROUND(avg(amount_of_sessions),2) as avg_sessions_per_hour
 from (select date_trunc('hour',created_at) as hour_of_event, count(distinct session_id) as amount_of_sessions from events group by 1) as t1;
 ```
 Result:
-avg_sessions_per_hour 
------------------------
-                  7.39
+
+| avg_sessions_per_hour|
+| -------------------- |
+|                 7.39 |
