@@ -1,6 +1,7 @@
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key='dbt_scd_id'
   )
 }}
 
@@ -24,3 +25,10 @@ SELECT
     dbt_valid_to
 
 FROM {{ ref('orders_snapshot') }}
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where dbt_scd_id >= (select max(dbt_scd_id) from {{ this }})
+
+{% endif %}
