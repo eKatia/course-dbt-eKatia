@@ -5,7 +5,6 @@
 }}
 
 SELECT 
-    id AS primary_key,
     event_id,
     event_type,
     session_id,

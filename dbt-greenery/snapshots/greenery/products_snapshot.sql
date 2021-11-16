@@ -9,7 +9,7 @@
     )
   }}
 
-  SELECT * 
+  SELECT *
   FROM {{ source('greenery_db', 'products') }}
 
 {% endsnapshot %}

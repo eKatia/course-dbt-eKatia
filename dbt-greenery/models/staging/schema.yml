@@ -1,0 +1,192 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: >-
+      The table lists all the addresses of the users
+    columns:
+      - name: address_id
+        description: The unique string address key identifier
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: The actual address
+        tests:
+          - not_null
+      - name: state
+        description: The state of the address
+      - name: zipcode
+        description: The zipcode of the address
+      - name: country
+        description: The country of the address
+      - name: dbt_scd_id
+        description: A unique key generated for each snapshotted record
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: dbt_updated_at
+        description: The updated_at timestamp of the source record when this snapshot row was inserted
+  - name: stg_events
+    description: >-
+      The table lists all the events that happened on Greenery website
+    columns:
+      - name: event_id
+        description: Unique event string key identifier
+        tests:
+          - unique
+          - not_null
+      - name: event_type
+        description: The exact event that happened
+      - name: session_id
+        description: The session idenfier for the event
+        tests:
+          - not_null
+      - name: user_id
+        description: The ID of the user who created an event
+        tests:
+          - not_null
+      - name: page_url
+        description: The URL of the page where the event occurred 
+      - name: created_at
+        description: The timestamp when the event happened
+  - name: stg_order_items
+    description: >-
+      The table lists all the items of each order
+    columns:
+      - name: order_item_id
+        description: Unique order item string key identifier
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: The order string key identifier which the order item belongs to
+        tests:
+          - not_null
+      - name: product_id
+        description: The string key identifier of the purchased product
+        tests:
+          - not_null
+      - name: quantity
+        description: The amount of the purchased product
+  - name: stg_orders
+    description: >-
+      The table lists all the orders
+    columns:
+      - name: order_id
+        description: Unique order id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        description: The string key identifier of the user who made the order
+        tests:
+          - not_null
+      - name: promo_id
+        description: The string key identifier of the promotion code if applied
+      - name: address_id
+        description: The string key identifier of the address to which the order should be delivered to
+        tests:
+          - not_null
+      - name: tracking_id
+        description: The string key identifier of the tracking to track the order
+      - name: shipping_service
+        description: The service that is shipping the order
+      - name: status
+        description: The status of the order
+      - name: estimated_delivery_at
+        description: The timestamp when the order is expected to be delivered
+      - name: created_at
+        description: The timestamp when the order was placed
+      - name: delivered_at
+        description: The actual delivery timestamp
+      - name: order_cost
+        description: The cost of the purchased order items
+      - name: shipping_cost
+        description: The cost of the delivery
+      - name: order_total
+        description: The total cost of the order
+      - name: dbt_scd_id
+        description: A unique key generated for each snapshotted record
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: dbt_updated_at
+        description: The updated_at timestamp of the source record when this snapshot row was inserted
+  - name: stg_products
+    description: >-
+      The table lists all the products of Greenery
+    columns:
+      - name: product_id
+        description: Unique product string key identifier
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: The name of the product
+      - name: price
+        description: The price of the product
+      - name: quantity
+        description: The quantity of the product
+      - name: dbt_scd_id
+        description: A unique key generated for each snapshotted record
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: dbt_updated_at
+        description: The updated_at timestamp of the source record when this snapshot row was inserted
+  - name: stg_promos
+    description: >-
+      The table lists all the promotions at Greenery
+    columns:
+      - name: promo_id
+        description: Unique promo string key identifier (e.g.task-force)
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: The amount of the discount
+      - name: dbt_scd_id
+        description: A unique key generated for each snapshotted record
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: dbt_updated_at
+        description: The updated_at timestamp of the source record when this snapshot row was inserted
+  - name: stg_users
+    description: >-
+      The table lists all the promotions at Greenery
+    columns:
+      - name: user_id
+        description:  Unique string user key identifier
+        tests:
+          - not_null
+          - unique
+      - name: address_id
+        description: The key of the address the user is associated with
+        tests:
+          - not_null
+      - name: first_name
+        description: The first name of the user
+      - name: last_name
+        description: The last name of the user
+      - name: email
+        description: The email of the user
+      - name: phone_number
+        description: The phone number of the user
+      - name: created_at
+        description: The timestamp the user was created at
+      - name: updated_at
+        description: The timestamp the user was updated at
+      - name: dbt_scd_id
+        description: A unique key generated for each snapshotted record
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: dbt_updated_at
+        description: The updated_at timestamp of the source record when this snapshot row was inserted

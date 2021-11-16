@@ -5,10 +5,13 @@
 }}
 
 SELECT 
-    id AS primary_key,
     product_id,
     name,
     price,
-    quantity
+    quantity,
+    dbt_scd_id,
+    dbt_updated_at,
+    dbt_valid_from,
+    dbt_valid_to
 
-FROM {{ source('greenery_db', 'products') }}
+FROM {{ ref('products_snapshot') }}

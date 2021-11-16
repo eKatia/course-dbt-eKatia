@@ -5,7 +5,7 @@
 }}
 
 SELECT 
-    id AS primary_key,
+    id AS order_item_id,
     order_id,
     product_id,
     quantity

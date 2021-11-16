@@ -5,10 +5,15 @@
 }}
 
 SELECT 
-    id AS primary_key,
+
     address_id,
     address,
     zipcode,
     state,
-    country
-FROM {{ source('greenery_db', 'addresses') }}
+    country,
+    dbt_scd_id,
+    dbt_updated_at,
+    dbt_valid_from,
+    dbt_valid_to
+
+FROM {{ ref('addresses_snapshot') }}
