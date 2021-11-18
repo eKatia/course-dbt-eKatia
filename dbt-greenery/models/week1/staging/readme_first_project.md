@@ -40,7 +40,7 @@ Result:
 | 25                               | 22                          | 81                                    |
 ## On average, how many unique sessions do we have per hour?
 ``` sql
-WITH sessions_per_hour AS (select date_trunc('hour',created_at) as hour_of_event, count(distinct session_id) as amount_of_sessions from events group by 1)
+WITH sessions_per_hour AS (select  date_part('hour',created_at) as hour_of_event, count(distinct session_id) as amount_of_sessions from events group by 1)
 
 select ROUND(avg(amount_of_sessions),2) as avg_sessions_per_hour
 from sessions_per_hour;
@@ -49,4 +49,4 @@ Result:
 
 | avg_sessions_per_hour|
 | -------------------- |
-|                 7.39 |
+|                120.56|
