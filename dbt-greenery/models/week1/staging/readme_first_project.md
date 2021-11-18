@@ -16,11 +16,13 @@ Result:
 `8.16`
 ## On average, how long does an order take from being placed to being delivered?
 ``` sql
-select avg(days_to_deliver) as avg_time_to_deliver_in_days
-from (select delivered_at - created_at as days_to_deliver from orders) as t1;
+WITH diff AS (select date_part('day',  delivered_at - created_at) * 24 + date_part('hour', delivered_at - created_at) as hours_to_deliver from public.orders)  
+
+select ROUND(avg(hours_to_deliver)) as avg_time_to_deliver_in_hours
+from diff;
 ```
 Result:
-`3 days 22:13:10.504451`
+`94 hours`
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
 ``` sql
 select SUM(CASE WHEN amount_of_orders = 1 THEN 1 ELSE 0 END) as customers_with_1_purchase,
