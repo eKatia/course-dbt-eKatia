@@ -8,9 +8,11 @@ Result:
 
 ## On average, how many orders do we receive per hour?
 ``` sql
+WITH orders_per_hour AS (select date_trunc('hour',created_at) as hour_of_order, count(distinct order_id) as orders_per_hour 
+                         from orders group by 1)
+      
 select ROUND(avg(orders_per_hour),2) as avg_orders_per_hour
-from (select date_trunc('hour',created_at) as hour_of_order, count(distinct order_id) as orders_per_hour 
-      from orders group by 1) as t1;
+from orders_per_hour;
 ```
 Result:
 `8.16`
@@ -37,8 +39,10 @@ Result:
 | 25                               | 22                          | 81                                    |
 ## On average, how many unique sessions do we have per hour?
 ``` sql
+WITH sessions_per_hour AS (select date_trunc('hour',created_at) as hour_of_event, count(distinct session_id) as amount_of_sessions from events group by 1)
+
 select ROUND(avg(amount_of_sessions),2) as avg_sessions_per_hour
-from (select date_trunc('hour',created_at) as hour_of_event, count(distinct session_id) as amount_of_sessions from events group by 1) as t1;
+from sessions_per_hour;
 ```
 Result:
 
