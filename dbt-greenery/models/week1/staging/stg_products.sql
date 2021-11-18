@@ -9,7 +9,7 @@ SELECT
     product_id,
     name,
     price,
-    quantity,
+    quantity as stock,
     dbt_scd_id,
     dbt_updated_at,
     dbt_valid_from,

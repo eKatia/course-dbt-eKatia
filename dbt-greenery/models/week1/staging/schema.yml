@@ -128,8 +128,8 @@ models:
         description: The name of the product
       - name: price
         description: The price of the product
-      - name: quantity
-        description: The quantity of the product
+      - name: stock
+        description: The quantity of the product in stock
       - name: dbt_scd_id
         description: A unique key generated for each snapshotted record
       - name: dbt_valid_from
