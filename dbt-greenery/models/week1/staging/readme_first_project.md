@@ -27,10 +27,11 @@ Result:
 `94 hours`
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
 ``` sql
+WITH amount_of_orders AS (select user_id, count(distinct order_id) as amount_of_orders from orders group by 1)
 select SUM(CASE WHEN amount_of_orders = 1 THEN 1 ELSE 0 END) as customers_with_1_purchase,
        SUM(CASE WHEN amount_of_orders = 2 THEN 1 ELSE 0 END) as customers_with_2_purchases,
        SUM(CASE WHEN amount_of_orders >= 3 THEN 1 ELSE 0 END) as customers_with_more_than_3_purchases
-from (select user_id, count(distinct order_id) as amount_of_orders from orders group by 1) as t1;
+from amount_of_orders;
 ```
 Result:
 
