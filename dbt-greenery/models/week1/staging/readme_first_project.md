@@ -8,14 +8,14 @@ Result:
 
 ## On average, how many orders do we receive per hour?
 ``` sql
-WITH orders_per_hour AS (select date_trunc('hour',created_at) as hour_of_order, count(distinct order_id) as orders_per_hour 
+WITH orders_per_hour AS (select date_part('hour',created_at) as hour_of_order, count(distinct order_id) as orders_per_hour 
                          from orders group by 1)
       
 select ROUND(avg(orders_per_hour),2) as avg_orders_per_hour
 from orders_per_hour;
 ```
 Result:
-`8.16`
+`16`
 ## On average, how long does an order take from being placed to being delivered?
 ``` sql
 WITH diff AS (select date_part('day',  delivered_at - created_at) * 24 + date_part('hour', delivered_at - created_at) as hours_to_deliver from public.orders)  
