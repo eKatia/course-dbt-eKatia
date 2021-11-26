@@ -7,19 +7,13 @@
 
 SELECT 
     product_id,
-    name,
-    price,
+    name as product_name,
+    price as product_price,
     quantity as stock,
     dbt_scd_id,
     dbt_updated_at,
     dbt_valid_from,
-    dbt_valid_to
+    dbt_valid_to,
+    dbt_valid_to is null as is_latest
 
 FROM {{ ref('products_snapshot') }}
-
-{% if is_incremental() %}
-
-  -- this filter will only be applied on an incremental run
-  where dbt_scd_id >= (select max(dbt_scd_id) from {{ this }})
-
-{% endif %}

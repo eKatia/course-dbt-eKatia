@@ -124,9 +124,9 @@ models:
         tests:
           - not_null
           - unique
-      - name: name
+      - name: product_name
         description: The name of the product
-      - name: price
+      - name: product_price
         description: The price of the product
       - name: stock
         description: The quantity of the product in stock

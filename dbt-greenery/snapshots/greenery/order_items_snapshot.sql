@@ -4,7 +4,7 @@
     config(
       target_schema='snapshots',
       strategy='check',
-      unique_key='id',
+      unique_key="order_id||'-'||product_id",
       check_cols=['quantity'],
     )
   }}

@@ -1,7 +1,6 @@
 {{
   config(
-    materialized='incremental',
-    unique_key='dbt_scd_id'
+    materialized='view'
   )
 }}
 
@@ -17,13 +16,7 @@ SELECT
     dbt_scd_id,
     dbt_updated_at,
     dbt_valid_from,
-    dbt_valid_to
+    dbt_valid_to,
+    dbt_valid_to is null as is_latest
 
 FROM {{ ref('users_snapshot') }}
-
-{% if is_incremental() %}
-
-  -- this filter will only be applied on an incremental run
-  where dbt_scd_id >= (select max(dbt_scd_id) from {{ this }})
-
-{% endif %}

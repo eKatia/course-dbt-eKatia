@@ -1,7 +1,6 @@
 {{
   config(
-    materialized='incremental',
-    unique_key='dbt_scd_id'
+    materialized='view'
   )
 }}
 
@@ -13,6 +12,7 @@ SELECT
     dbt_scd_id,
     dbt_updated_at,
     dbt_valid_from,
-    dbt_valid_to
+    dbt_valid_to,
+    dbt_valid_to is null as is_latest
 
 FROM {{ ref('order_items_snapshot') }}

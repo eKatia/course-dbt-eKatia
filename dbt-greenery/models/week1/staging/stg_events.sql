@@ -3,6 +3,7 @@
     materialized='view'
   )
 }}
+WITH sources AS ( SELECT * FROM {{ source('greenery_db', 'events') }})
 
 SELECT 
     event_id,
@@ -11,4 +12,5 @@ SELECT
     user_id,
     page_url,
     created_at
-FROM {{ source('greenery_db', 'events') }}
+    
+FROM sources
