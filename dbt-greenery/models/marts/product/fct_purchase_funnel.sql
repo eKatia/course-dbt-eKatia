@@ -7,12 +7,12 @@
 
 WITH 
 users as (
-  select
+  SELECT
     user_id, 
     min(created_at) as min_visit_ts 
-  from {{ref('stg_events')}}
-  where event_type = 'page_view'
-  group by 1
+  FROM {{ref('stg_events')}}
+  WHERE event_type = 'page_view'
+  GROUP BY 1
 ),
 accounts_created AS ( 
     SELECT distinct e.user_id 

@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: fct_purchase_funnel
+    description: >-
+      Puchase funnel fact
+    columns:
+      - name: stage
+        description: The stage in purchase funnel
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+               values: ['Visit', 'Sign Up', 'Added to Cart', 'Purchase']
+      - name: amount_of_users
+        description: Total amount of users which reached the funnel stage
+        tests:
+          - not_null
+      - name: amount_of_users_at_prev_step
+        description: Total amount of users which reached the previous funnel stage
+      - name: drop_off
+        description: The percentage of users that drop off between the stages
+  - name: fct_web_session
+    description: >-
+      Web Session fact
+    columns:
+      - name: session_id
+        description: Unique session ID
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - not_null
+      - name: page_views_in_session
+        description: The amount of page views in the session
+      - name: session_length_seconds
+        description: How long the session lasted in seconds
+      - name: first_event
+        description: First event within the session
+      - name: last_event
+        description: Last event within the session
+      - name: first_page_visited
+        description: The first page visited in the session
+      - name: is_bounce
+        description: Single-page session
+
+

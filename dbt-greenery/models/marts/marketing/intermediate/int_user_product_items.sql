@@ -21,11 +21,12 @@ WITH
     FROM order_items oi
     JOIN orders o ON oi.order_id = o.order_id
     LEFT JOIN products p ON oi.product_id = p.product_id)
+ 
 
-SELECT            user_id
-           , product_name
-           , COUNT(DISTINCT order_id) as times_purchased
-           , SUM(quantity) as total_amount_purchased
+SELECT            up.user_id
+           , up.product_name
+           , COUNT(DISTINCT up.order_id) as times_purchased
+           , SUM(up.quantity) as total_amount_purchased
 
-FROM users_and_products
+FROM users_and_products up
 GROUP BY 1,2

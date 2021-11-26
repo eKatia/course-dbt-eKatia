@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_user_product_items
+    description: >-
+      Intermediate table for product items purchased by users
+    columns:
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - not_null
+      - name: product_name
+        description: The name of product
+        tests:
+          - not_null
+      - name: times_purchased
+        description: Amount of times the product was purchased by the user
+      - name: total_amount_purchased
+        description: Total amount of the product purchased by the user

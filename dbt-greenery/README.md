@@ -5,4 +5,7 @@
 - The answers to projects questions are in `dbt-greenery/models/week1/staging/readme_first_project.md`
 
 ## Week 1 Lineage Graph
-![DBT](images/LineageGraphWeek1.png)
+![DAG](images/LineageGraphWeek1.png)
+
+## Week 2 Lineage Graph
+![DAG](images/LineageGraphWeek2.png)

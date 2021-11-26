@@ -14,7 +14,7 @@ FROM {{ref('stg_events')}}  )
 
 SELECT DISTINCT 
        session_id
-     , user_id
+     , FIRST_VALUE(user_id) OVER(PARTITION BY session_id ORDER BY created_at ROWS between unbounded preceding and unbounded following) as user_id
      , SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) OVER(PARTITION BY session_id) AS page_views_in_session
      , EXTRACT(EPOCH FROM (MAX(created_at) OVER(PARTITION BY session_id) - MIN(created_at) OVER(PARTITION BY session_id))) as session_length_seconds
      , FIRST_VALUE(event_type) OVER(PARTITION BY session_id ORDER BY created_at ROWS between unbounded preceding and unbounded following) as first_event

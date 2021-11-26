@@ -1,0 +1,189 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: >-
+      Product dimension
+    columns:
+      - name: product_id
+        description: Unique product ID
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: product_name
+        description: The name of product
+        tests:
+          - not_null
+      - name: product_price
+        description: Price of the product
+  - name: dim_user
+    description: >-
+      User dimension
+    columns:
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: first_name
+        description: User's first name
+        tests:
+          - not_null
+      - name: last_name
+        description: User's last name
+        tests:
+          - not_null
+      - name: address
+        description: User's address
+        tests:
+          - not_null
+      - name: email
+        description: User's email
+      - name: phone_number
+        description: User's phone number
+      - name: created_at
+        description: The timestamp when the user was created
+        tests:
+          - not_null
+  - name: hdim_user
+    description: >-
+      User dimension with history
+    columns:
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - not_null
+      - name: first_name
+        description: User's first name
+        tests:
+          - not_null
+      - name: last_name
+        description: User's last name
+        tests:
+          - not_null
+      - name: address
+        description: User's address
+        tests:
+          - not_null
+      - name: email
+        description: User's email
+        tests:
+          - not_null
+      - name: phone_number
+        description: User's phone number
+        tests:
+          - not_null
+      - name: created_at
+        description: The timestamp when the user was created
+        tests:
+          - not_null
+      - name: scd_valid_from
+        description: The timestamp since when the record (scd - slowly changing dimension) was valid
+      - name: scd_valid_to
+        description: The timestamp till when the record (scd - slowly changing dimension) was valid
+  - name: fct_agg_orders_daily
+    description: >-
+      User dimension with history
+    columns:
+      - name: calendar_date
+        description: Calendar observation date
+        tests:
+          - not_null
+      - name: shipping_service
+        description: The company who is deliverig the order
+      - name: order_cost
+        description: Total cost of orders purchased on the day
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: Total shipping cost of orders purchased on the day
+        tests:
+          - not_null
+      - name: total_order_cost
+        description: Total order cost of all orders purchased on the day
+        tests:
+          - not_null
+      - name: total_users
+        description: Total amount of user who made a purchase on the day
+        tests:
+          - not_null
+      - name: delivered_orders
+        description: Total amount of delivered orders
+      - name: total_orders
+        description: TTotal amount of placed orders
+      - name: average_discount
+        description: Average order discount
+  - name: fct_order
+    description: >-
+      Order fact table
+    columns:
+      - name: order_id
+        description: Unique order ID
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: user_id
+        description: User ID who made a purchase
+        tests:
+          - not_null
+      - name: promo_id
+        description: Promo ID used on the order (if any)
+      - name: delivery_address
+        description: Delivery address
+        tests:
+          - not_null
+      - name: shipping_service
+        description: The company who is deliverig the order
+      - name: status
+        description: Current status of the order
+      - name: status
+        description: Current status of the order
+      - name: estimated_delivery_at
+        description: The timestamp when the order is expected to be delivered
+      - name: created_at
+        description: The timestamp when the order was placed
+      - name: delivered_at
+        description: The actual delivery timestamp
+      - name: delivery_estimation_accuracy_in_hours
+        description: The difference between estimation and actual delivery in hours
+      - name: delivery_time_in_hours
+        description: The amount of time that it took to deliver the order in hours
+      - name: order_cost
+        description: The cost of the purchased order items
+      - name: shipping_cost
+        description: The cost of the delivery
+      - name: order_total
+        description: The total cost of the order
+  - name: fct_product_stock_price_daily
+    description: >-
+      Product stock & price on a daily basis
+    columns:
+      - name: calendar_date
+        description: Calendar observation date
+        tests:
+          - not_null
+      - name: product_id
+        description: Unique product ID
+        tests:
+          - not_null
+      - name: product_price
+        description: Price of the product on that date
+        tests:
+          - not_null
+      - name: stock
+        description: The amount of product in stock on that date
+      - name: stock_change
+        description: The column shows whether the stock changed compared to the previous day
+        tests:
+          - not_null
+      - name: price_change
+        description: The column shows whether the price changed compared to the previous day

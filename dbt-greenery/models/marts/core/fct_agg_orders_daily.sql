@@ -16,9 +16,9 @@ WITH calendar AS ({{ dbt_utils.date_spine(
 
 SELECT    date_day::date as calendar_date
         , shipping_service
-        , SUM(order_cost) as total_order_cost
-        , SUM(shipping_cost) as total_shipping_cost
-        , SUM(order_total) as total_order_total
+        , SUM(order_cost) as order_cost
+        , SUM(shipping_cost) as shipping_cost
+        , SUM(order_total) as total_order_cost
         , COUNT(distinct user_id) as total_users
         , COUNT(CASE WHEN o.status = 'delivered' THEN order_id END) as delivered_orders
         , COUNT(o.order_id) as total_orders

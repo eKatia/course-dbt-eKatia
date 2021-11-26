@@ -1,0 +1,101 @@
+version: 2
+
+models:
+  - name: int_dim_user
+    description: >-
+      Intermediate table for user dimension
+    columns:
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: first_name
+        description: First name of the user
+        tests:
+          - not_null
+      - name: last_name
+        description: Last name of the user
+      - name: address
+        description: The user's address
+      - name: email
+        description: The user's email
+      - name: phone_number
+        description: The user's phone number
+      - name: created_at
+        description: The timestamp when this user was created
+      - name: scd_valid_from
+        description: The timestamp since when the record (scd - slowly changing dimension) was valid
+      - name: scd_valid_to
+        description: The timestamp till when the record (scd - slowly changing dimension) was valid
+      - name: is_latest
+        description: A boolen flag whether the record is the latest for the user
+  - name: int_fct_order
+    description: >-
+      Intermediate table for fact order
+    columns:
+      - name: order_id
+        description: Unique order ID
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: user_id
+        description: User ID who made a purchase
+        tests:
+          - not_null
+      - name: promo_id
+        description: Promo ID used on the order (if any)
+      - name: delivery_address
+        description: Delivery address
+        tests:
+          - not_null
+      - name: shipping_service
+        description: The company who is deliverig the order
+      - name: status
+        description: Current status of the order
+      - name: status
+        description: Current status of the order
+      - name: estimated_delivery_at
+        description: The timestamp when the order is expected to be delivered
+      - name: created_at
+        description: The timestamp when the order was placed
+      - name: delivered_at
+        description: The actual delivery timestamp
+      - name: order_cost
+        description: The cost of the purchased order items
+      - name: shipping_cost
+        description: The cost of the delivery
+      - name: order_total
+        description: The total cost of the order
+      - name: dbt_valid_from
+        description: The timestamp when this snapshot row was first inserted
+      - name: dbt_valid_to
+        description: The timestamp when this row became invalidated
+      - name: is_latest
+        description: A boolen flag whether the record is the latest for the order
+  - name: int_product_snapshot_date_spine
+    description: >-
+      The intermediate table which creates daily view of the product snapshot
+    columns:
+      - name: calendar_date
+        description: Calendar observation date
+        tests:
+          - not_null
+      - name: product_id
+        description: The string key identifier of product
+        tests:
+          - not_null
+      - name: product_name
+        description: The name of product
+      - name: product_price
+        description: The price of product
+      - name: stock
+        description: The amount of product in stock on that date
+      - name: is_latest
+        description: A boolen flag whether the record is the latest for the product

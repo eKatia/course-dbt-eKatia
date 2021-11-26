@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_user_orders
+    description: >-
+      Intermediate table for product items purchased by users
+    columns:
+      - name: user_id
+        description: Unique user ID
+        tests:
+          - unique
+          - not_null
+      - name: total_spend
+        description: Total amount of $ spent by the user
+        tests:
+          - not_null
+      - name: total_orders
+        description: Total amount of orders made by the user
+      - name: one_time_customer
+        description: Boolean flag whether the user made only 1 purchase
+      - name: total_days_between_purchases
+        description: Total days in between all puchases made by the user
+      - name: avg_purchase_rate
+        description: Total days in between all puchases made by the user devided by total amount of orders made by the user
+      - name: first_order_date
+        description: First time the user made a purchase
+      - name: last_order_date
+        description: Last time the user made a purchase
+      - name: last_order_date
+        description: Last time the user made a purchase
+      - name: most_times_purchased_products
+        description: The products that were puchased most of the time
+      - name: most_quantity_purchased_products
+        description: The products that were puchased the most
