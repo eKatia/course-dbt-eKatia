@@ -4,8 +4,3 @@
 - To check snapshots configurations, go to `dbt-greenery/snaphots`. 
 - The answers to projects questions are in `dbt-greenery/models/week1/staging/readme_first_project.md`
 
-## Week 1 Lineage Graph
-![DAG](images/LineageGraphWeek1.png)
-
-## Week 2 Lineage Graph
-![DAG](images/LineageGraphWeek2.png)
