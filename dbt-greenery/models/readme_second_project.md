@@ -71,7 +71,7 @@ The marts are stored in 3 (in this project) folders:
 
 Event Marts subfolder has an intermediate subfolder, in case some data manipulatiions are required to create the downstream dimensions and facts and those tables could be reused. 
 
-Core Marts: 
+#### Core Marts: 
 1. *dim_product* - latest information on products availalbe in Greenary
 2. *dim_user* - latest information on all users of Greenary
 3. *fct_agg_orders_daily* - orders (e.g. total orders costs, total amount of users, etc.) data aggregated to date and deliver service level. THe summary could be useful for all departments to get an idea of how company is growing over time. It could also be used by Finance/Sales/Planning departments to make forecasts. 
@@ -79,10 +79,10 @@ Core Marts:
 5. *fct_product_stock_price* - snapshot of product stock and prices changes ( due to no ETL, snapshot is not showing any change). It could be used to analyse price changes depending on the amount of stocks and track the trend.
 6. *hdim_user* - an example of a historical dimension, that could be used to join with facts to get more accurate information on users (given the data changes) over time.
 
-Marketing Marts: 
+#### Marketing Marts: 
 *fct_user_orders* - table aggregates data on users purchases. We can see how much every user contributed to the revenue of the company, how many orders have been made, what the most purchased products are, etc.
 
-Product Marts:
+#### Product Marts:
 1. *fct_purchase_funnel* - a table that could be used to analyse purchase funnel on Greenary website. E.g. if very few users end up making a purchase, maybe the UI is complicated or there is a bug on the website that prevents from purchasing
 2. *fct_web_session* - events data rolled up to session level. A useful tool to analyze product data
 
