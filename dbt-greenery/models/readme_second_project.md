@@ -87,7 +87,7 @@ Event Marts subfolder has an intermediate subfolder, in case some data manipulat
 2. *fct_web_session* - events data rolled up to session level. A useful tool to analyze product data
 
 ## Models DAG 
-![DAG](images/LineageGraphWeek2.png)
+![DAG](dbt-greenery/images/LineageGraphWeek2.png)
 
 ## Models Tests
 Some tests that i originally set up we failing, e.g. `created_at` at orders - logically it should always be filled but the data is not clean enough, thus i removed the test.
