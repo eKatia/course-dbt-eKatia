@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: fct_user_orders
+  - name: fct_user_order
     description: >-
       Intermediate table for product items purchased by users
     columns:
