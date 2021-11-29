@@ -4,8 +4,9 @@
   )
 }}
 
-WITH users AS (SELECT * FROM {{ref('int_dim_user')}} WHERE is_latest)
+WITH 
 
+  users AS (SELECT * FROM {{ref('int_dim_user')}} WHERE is_latest)
 , orders AS (SELECT * FROM {{ref('int_fct_order')}} WHERE is_latest)
 , user_and_products AS (SELECT * FROM {{ref('int_user_product_items')}})
 , products AS (SELECT * FROM {{ref('stg_products')}} WHERE is_latest)
