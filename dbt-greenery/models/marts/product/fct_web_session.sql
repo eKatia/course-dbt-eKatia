@@ -20,6 +20,9 @@ SELECT DISTINCT
      , FIRST_VALUE(event_type) OVER(PARTITION BY session_id ORDER BY created_at ROWS between unbounded preceding and unbounded following) as first_event
      , LAST_VALUE(event_type) OVER(PARTITION BY session_id ORDER BY created_at ROWS between unbounded preceding and unbounded following) as last_event
      , COALESCE(FIRST_VALUE(split_part(page_url, '/',4)) OVER(PARTITION BY session_id ORDER BY created_at ROWS between unbounded preceding and unbounded following), 'homepage') as first_page_visited
+     , SUM(CASE WHEN event_type = 'checkout' THEN 1 ELSE 0 END) OVER(PARTITION BY session_id) as has_conversion
+     
+
 
 FROM all_events AS ev 
 )
