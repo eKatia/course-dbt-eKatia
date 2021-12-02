@@ -52,7 +52,7 @@ GROUP BY 1)
 , days_between_purchase AS (
 SELECT  order_id
       , user_id 
-      , DATE_PART('day', LEAD(created_at) OVER (PARTITION BY user_id ORDER BY created_at) - created_at) * 24 + DATE_PART('hour', LEAD(created_at) OVER (PARTITION BY user_id ORDER BY created_at) - created_at) as days_between_purchase 
+      , {{ dbt_utils.datediff("created_at", "LEAD(created_at) OVER (PARTITION BY user_id ORDER BY created_at)", 'day') }} as  days_between_purchase 
 FROM orders)
 
 , days_between_purchase_total AS (

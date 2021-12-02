@@ -6,31 +6,18 @@
 }}
 
 WITH 
-users as (
-  SELECT
-    user_id, 
-    min(created_at) as min_visit_ts 
-  FROM {{ref('stg_events')}}
-  WHERE event_type = 'page_view'
-  GROUP BY 1
-),
-accounts_created AS ( 
-    SELECT distinct e.user_id 
-    FROM users u
-    JOIN {{ref('stg_events')}} e on e.user_id = u.user_id
-    WHERE event_type = 'account_created')
 
-, added_to_cart AS (
-    SELECT distinct e.user_id 
-    FROM users u
-    JOIN {{ref('stg_events')}} e on e.user_id = u.user_id
-    WHERE event_type = 'add_to_cart')
+events AS (SELECT * FROM {{ref('stg_events')}})
 
-, checkouted AS (
-    SELECT distinct e.user_id 
-    FROM users u
-    JOIN {{ref('stg_events')}} e on e.user_id = u.user_id
-    WHERE event_type = 'checkout')
+, order_item_products AS (SELECT * FROM {{ref('int_order_item')}})
+
+, users as ( {{ distinct_users_by_event('page_view') }} )
+
+, accounts_created AS ( {{ distinct_users_by_event('account_created') }} )
+
+, added_to_cart AS ( {{ distinct_users_by_event('add_to_cart') }} )
+
+, checkouted AS ({{ distinct_users_by_event('checkout') }} )
 
 , stages AS (
 SELECT 'Visit' as stage, COUNT(*) as amount_of_users FROM users

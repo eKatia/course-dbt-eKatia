@@ -67,3 +67,5 @@ Result:
 | Alocasia Polly      |             33 |                 10 |           30.30 |
 | Jade Plant          |             26 |                 10 |           38.46 |
 | Devil's Ivy         |             35 |                 10 |           28.57 |
+
+### Why some products might be converting more than other?

@@ -39,4 +39,10 @@ models:
     marts:
       # This is for top level dimensions that will draw together facts across all other models
       schema: marts
+      post-hook:
+        - "analyze {{ this }}"
+        - "grant select on {{ this }} to reporting"
+on-run-end:
+   - "{% for schema in schemas %} grant select on all tables in schema {{ schema }} to reporting; {% endfor %}"
+   - "grant usage on schema dbt_katya_khr_marts to reporting"
 
