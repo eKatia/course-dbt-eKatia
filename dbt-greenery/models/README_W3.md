@@ -69,3 +69,7 @@ Result:
 | Devil's Ivy         |             35 |                 10 |           28.57 |
 
 ### Why some products might be converting more than other?
+
+- Maybe some product pages are more advertised and promoted with SEO. 
+- Some might be on discounts more often
+- It can be the nature of plants themselves: some are easier to take care of, for example.
