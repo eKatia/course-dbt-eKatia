@@ -73,3 +73,8 @@ Result:
 - Maybe some product pages are more advertised and promoted with SEO. 
 - Some might be on discounts more often
 - It can be the nature of plants themselves: some are easier to take care of, for example.
+### Macros
+- I added some macros to simplify CASE WHEN logic, a macro to calculate distinct users by event
+- I used `dbt_utils` package to simplify DATEDIFF logic, when calculating hourly difference between timestamps
+- I added post-hook to grant select permissions on marts layer
+- I added on-run-end to grant select permissions on all schemas for the role and usage permissions on marts layer.
