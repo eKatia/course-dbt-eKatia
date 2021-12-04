@@ -11,4 +11,5 @@ exposures:
     name: Ekaterina
     email: myemail
   depends_on:
-    - ref('fct_purchase_funnel')
+    - ref('fct_user_funnel')
+    - ref('fct_funnel_daily')
