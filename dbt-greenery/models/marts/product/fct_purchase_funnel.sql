@@ -7,7 +7,7 @@
 
 WITH 
 
-events AS (SELECT * FROM {{ref('stg_events')}})
+events AS (SELECT * FROM {{ref('stg_events')}} WHERE created_at IS NOT NULL)
 
 , order_item_products AS (SELECT * FROM {{ref('int_order_item')}})
 
