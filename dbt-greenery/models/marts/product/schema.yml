@@ -1,9 +1,9 @@
 version: 2
 
 models:
-  - name: fct_purchase_funnel
+  - name: fct_user_funnel
     description: >-
-      Puchase funnel fact
+      Puchase funnel fact by users
     columns:
       - name: stage
         description: The stage in purchase funnel
@@ -45,5 +45,30 @@ models:
         description: The first page visited in the session
       - name: is_bounce
         description: Single-page session
+  - name: fct_funnel_daily
+    description: >-
+      Funnel daily
+    columns:
+      - name: calendar_date
+        description: Observation date
+        tests:
+          - unique
+          - not_null
+      - name: total_sessions
+        description: Total amount of sessions
+        tests:
+          - not_null
+      - name: sessions_with_pv
+        description: Amount of sessions with page view
+      - name: sessions_with_add_to_cart
+        description: Amount of sessions when a product was added to cart
+      - name: sessions_with_checkout
+        description: Amount of sessions with checkout event
+      - name: sessions_with_pv_percentage
+        description: Percentage of all sessions that had a page view 
+      - name: sessions_with_add_to_cart_percentage
+        description: Percentage of page view sessions that had a add to cart event
+      - name: sessions_with_checkout_percentage
+        description: Percentage of add to cart sessions that had a checkout event
 
 
