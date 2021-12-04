@@ -8,6 +8,8 @@
 # Week 2 Project Instructions
 - Please, go to `dbt-greenery/models/marts` - this folder contains all created marts
 - The answers to project questions are in `dbt-greenery/models/README_W2.md`
-
+- 
+# Week 3 Project Instructions
+- The answers to project questions are in `dbt-greenery/models/README_W3.md`
 ## DAG: 
 ![DAG](images/LineageGraphWeek2.png)
